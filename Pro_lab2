@@ -1,0 +1,254 @@
+
+package ia19b_lab2;
+import java.util.Scanner;
+
+ public class Person {
+    private int id;
+    private String name;
+    private boolean gender;
+    public Person(int id, String name, boolean gender){
+        this.id=id;
+        this.name=name;
+        this.gender=gender;
+    }
+    
+
+
+   public int getId(){
+       return this.id;
+   }
+   public void setId(int value){
+       this.id = value;
+   }
+   public String getName(){
+       return this.name;
+   }
+   public void setName(String value){
+       this.name= value;
+   }
+   public boolean gender(){
+       return this.gender;
+   }
+   public void setGender(boolean value){
+       this.gender =value;
+   }
+   public void scanIfo(){
+       Scanner input = new Scanner(System.in);
+       System.out.print("Enter ID:");
+       this.id = input.nextInt();
+       input.nextLine();
+       System.out.print("Enter Name:");
+       this.name =input.nextLine();
+       System.out.print("Enter Gender:");
+       this.gender = input.nextBoolean();
+   }
+   public void printInfo(){
+       System.out.println("----------------------------------------------");
+       System.out.println("| ID | Name | Male |");
+       System.out.printf("| %d | %s| %b ||\n", this.id, this.name, this.gender );
+   }
+
+}
+
+package ia19b_lab2;
+
+import java.util.Scanner;
+
+public class Test {
+    public static void main(String[] args){
+       Scanner input = new Scanner(System.in);
+        Person p =new Person(0,"", true);
+        Person p1 = new Person(0, "", true);
+        Person p2 = new Person(1, "Nguyen Van A", true);
+        Person p3 = new Person(2, "Nguyen Van B", false);
+        String [] perArr = new String[4];
+        p1.scanIfo();
+        p1.printInfo(); 
+        perArr[0] = p2.getName();
+        perArr[1] = p3.getName();
+        System.out.print("Enter value for  score: ");
+        perArr[0] = input.nextLine();
+        System.out.print("Enter value for class: ");
+        perArr[1] = input.nextLine();
+        System.out.println("Elements of perArr array:");
+        p1.printInfo(); 
+        System.out.println("----------------------------------------------");
+        System.out.println("| Score | Class | ");
+        for (int i = 0; i < 2; i++) {
+        System.out.print("| "+ perArr[i] +" |");
+}
+    }
+    private int id;
+    private String name;
+    private boolean gender;
+    public void scanIfo(String[] perArr){
+       Scanner input = new Scanner(System.in);
+       double score=0;
+       String roomClass="";
+       System.out.print("Enter ID:");
+       this.id = input.nextInt();
+       input.nextLine();
+       System.out.print("Enter Name:");
+       this.name =input.nextLine();
+       System.out.print("Enter Gender:");
+       this.gender = input.nextBoolean();
+       System.out.print("Enter Score: ");
+       perArr[0] = input.nextLine();
+       System.out.print("Enter Room Class: ");
+       perArr[1] = input.nextLine();
+   }
+   public void printInfo(String[] perArr){
+       System.out.println("----------------------------------------------");
+       System.out.println("| ID | Name | Male | ");
+       System.out.printf("| %d | %s| %b |\n", this.id, this.name, this.gender);
+   }
+    
+}
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Test2 {
+     public static void main(String[] args){
+        ArrayList<Person> personList = new ArrayList<>();
+        Person p1 = new Person(0, "", true);
+        p1.scanIfo();
+        p1.printInfo(); 
+        Person p2 = new Person(1, "Nguyen Van A", true);
+        Person p3 = new Person(2, "Nguyen Van B", false);
+        personList.add(p2);
+        personList.add(p3);
+        
+        Scanner input = new Scanner(System.in);
+        Person p4 = new Person(0, "", true);
+        System.out.print("Enter ID for p4: ");
+        p4.setId(input.nextInt());
+        input.nextLine();
+        System.out.print("Enter Name for p4: ");
+        p4.setName(input.nextLine());
+        System.out.print("Enter Gender for p4: ");
+        p4.setGender(input.nextBoolean());
+        personList.add(p4);
+
+        Person p5 = new Person(0, "", true);
+        System.out.print("Enter ID for p5: ");
+        p5.setId(input.nextInt());
+        input.nextLine();
+        System.out.print("Enter Name for p5: ");
+        p5.setName(input.nextLine());
+        System.out.print("Enter Gender for p5: ");
+        p5.setGender(input.nextBoolean());
+        personList.add(p5);
+        
+        sortByName(personList);
+        System.out.println("Sorted ArrayList:");
+        for (Person person : personList) {
+            person.printInfo();
+        }
+        
+        System.out.print("Enter name to search: ");
+        String name = input.nextLine();
+        Person foundPerson = searchByName(personList, name);
+        if (foundPerson != null) {
+            System.out.println("Found person: ");
+            foundPerson.printInfo();
+        } else {
+            System.out.println("Person not found.");
+        }
+    }
+    
+    public static void sortByName(ArrayList<Person> personList) {
+        for (int i = 0; i < personList.size() - 1; i++) {
+            for (int j = i + 1; j < personList.size(); j++) {
+                if (personList.get(i).getName().compareTo(personList.get(j).getName()) > 0) {
+                    Person temp = personList.get(i);
+                    personList.set(i, personList.get(j));
+                    personList.set(j, temp);
+                }
+            }
+        }
+    }
+    
+    public static Person searchByName(ArrayList<Person> personList, String name) {
+        for (Person person : personList) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null;
+    }
+}
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Test2 {
+     public static void main(String[] args){
+        ArrayList<Person> personList = new ArrayList<>();
+        Person p1 = new Person(0, "", true);
+        p1.scanIfo();
+        p1.printInfo(); 
+        Person p2 = new Person(1, "Nguyen Van A", true);
+        Person p3 = new Person(2, "Nguyen Van B", false);
+        personList.add(p2);
+        personList.add(p3);
+        
+        Scanner input = new Scanner(System.in);
+        Person p4 = new Person(0, "", true);
+        System.out.print("Enter ID for p4: ");
+        p4.setId(input.nextInt());
+        input.nextLine();
+        System.out.print("Enter Name for p4: ");
+        p4.setName(input.nextLine());
+        System.out.print("Enter Gender for p4: ");
+        p4.setGender(input.nextBoolean());
+        personList.add(p4);
+
+        Person p5 = new Person(0, "", true);
+        System.out.print("Enter ID for p5: ");
+        p5.setId(input.nextInt());
+        input.nextLine();
+        System.out.print("Enter Name for p5: ");
+        p5.setName(input.nextLine());
+        System.out.print("Enter Gender for p5: ");
+        p5.setGender(input.nextBoolean());
+        personList.add(p5);
+        
+        sortByName(personList);
+        System.out.println("Sorted ArrayList:");
+        for (Person person : personList) {
+            person.printInfo();
+        }
+        
+        System.out.print("Enter name to search: ");
+        String name = input.nextLine();
+        Person foundPerson = searchByName(personList, name);
+        if (foundPerson != null) {
+            System.out.println("Found person: ");
+            foundPerson.printInfo();
+        } else {
+            System.out.println("Person not found.");
+        }
+    }
+    
+    public static void sortByName(ArrayList<Person> personList) {
+        for (int i = 0; i < personList.size() - 1; i++) {
+            for (int j = i + 1; j < personList.size(); j++) {
+                if (personList.get(i).getName().compareTo(personList.get(j).getName()) > 0) {
+                    Person temp = personList.get(i);
+                    personList.set(i, personList.get(j));
+                    personList.set(j, temp);
+                }
+            }
+        }
+    }
+    
+    public static Person searchByName(ArrayList<Person> personList, String name) {
+        for (Person person : personList) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null;
+    }
+}
